@@ -1,36 +1,121 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js CRUD Application
 
-## Getting Started
+A modern, full-stack CRUD (Create, Read, Update, Delete) application built with Next.js 16, React 19, TypeScript, and Prisma ORM.
 
-First, run the development server:
+## 🚀 Features
+
+- **Modern Tech Stack** - Next.js 16, React 19, TypeScript
+- **Database Integration** - Prisma ORM with PostgreSQL
+- **Styling** - Tailwind CSS 4
+- **Type Safety** - Full TypeScript support
+- **API Routes** - RESTful API endpoints
+- **Responsive Design** - Mobile-friendly UI
+
+## 🛠️ Prerequisites
+
+Before running this project, ensure you have the following installed:
+
+- Node.js 18.x or later
+- PostgreSQL (or your preferred database)
+- npm, yarn, pnpm, or bun
+
+## 📦 Installation
+
+1. Clone the repository:
+
+```bash
+git clone <repository-url>
+cd nextjs-crud-app
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+# or
+bun install
+```
+
+3. Configure environment variables:
+
+```bash
+cp .env.example .env
+```
+
+Edit the `.env` file with your database credentials:
+
+```
+DATABASE_URL="postgresql://user:password@localhost:5432/mydb"
+```
+
+4. Initialize Prisma:
+
+```bash
+npx prisma generate
+npx prisma db push
+```
+
+## 🏃‍♂️ Running the Development Server
+
+Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+nextjs-crud-app/
+├── app/                    # Next.js App Router
+│   ├── api/               # API routes
+│   │   └── users/         # Users API endpoint
+│   ├── globals.css        # Global styles
+│   ├── layout.tsx         # Root layout
+│   └── page.tsx           # Home page
+├── prisma/
+│   └── schema.prisma      # Prisma schema
+├── public/                # Static assets
+├── .env                   # Environment variables
+├── .env.example           # Environment template
+├── .gitignore             # Git ignore rules
+├── next.config.ts         # Next.js configuration
+├── package.json           # Dependencies
+├── tailwind.config.ts     # Tailwind configuration
+└── tsconfig.json          # TypeScript configuration
+```
 
-## Learn More
+## 🔧 Available Scripts
 
-To learn more about Next.js, take a look at the following resources:
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Build for production |
+| `npm run start` | Start production server |
+| `npm run lint` | Run ESLint |
+| `npx prisma studio` | Open Prisma database GUI |
+| `npx prisma generate` | Generate Prisma client |
+| `npx prisma db push` | Push schema to database |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🧑‍💻 Technologies
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Framework**: [Next.js](https://nextjs.org) 16.2.1
+- **Language**: [TypeScript](https://www.typescriptlang.org) 5
+- **UI Library**: [React](https://react.dev) 19.2.4
+- **Styling**: [Tailwind CSS](https://tailwindcss.com) 4
+- **Database ORM**: [Prisma](https://www.prisma.io) 7.6.0
+- **Database**: PostgreSQL (configurable)
 
-## Deploy on Vercel
+## 📄 License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project is licensed under the MIT License.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+Built with ❤️ using Next.js and Prisma
