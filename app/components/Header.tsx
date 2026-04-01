@@ -5,6 +5,7 @@ export default function Header() {
         <h1 className="text-xl font-bold">My CRUD App</h1>
         <ul className="flex gap-4">
           <li><a href="/" className="hover:text-gray-300">Home</a></li>
+          <li><a href="/blog" className="hover:text-gray-300">Blog</a></li>
           <li><a href="/about" className="hover:text-gray-300">About</a></li>
         </ul>
       </nav>
