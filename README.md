@@ -1,15 +1,17 @@
 # Next.js CRUD Application
 
-A modern, full-stack CRUD (Create, Read, Update, Delete) application built with Next.js 16, React 19, TypeScript, and Prisma ORM.
+A modern, full-stack CRUD (Create, Read, Update, Delete) application built with Next.js 16, React 19, TypeScript, Prisma ORM, and PostgreSQL.
 
 ## 🚀 Features
 
+- **Full CRUD Operations** - Create, Read, Update, and Delete users
 - **Modern Tech Stack** - Next.js 16, React 19, TypeScript
 - **Database Integration** - Prisma ORM with PostgreSQL
+- **RESTful API** - Built-in API routes
 - **Styling** - Tailwind CSS 4
 - **Type Safety** - Full TypeScript support
-- **API Routes** - RESTful API endpoints
 - **Responsive Design** - Mobile-friendly UI
+- **Component Architecture** - Reusable Header/Footer components
 
 ## 🛠️ Prerequisites
 
@@ -76,19 +78,27 @@ nextjs-crud-app/
 ├── app/                    # Next.js App Router
 │   ├── api/               # API routes
 │   │   └── users/         # Users API endpoint
+│   ├── components/        # Reusable components
+│   │   ├── Header.tsx    # Navigation header
+│   │   └── Footer.tsx    # Footer component
+│   ├── lib/               # Utility functions
+│   │   ├── api.ts        # API client functions
+│   │   └── prisma.ts     # Prisma client
+│   ├── about/             # About page
+│   │   └── page.tsx      # About page component
 │   ├── globals.css        # Global styles
-│   ├── layout.tsx         # Root layout
-│   └── page.tsx           # Home page
+│   ├── layout.tsx        # Root layout
+│   └── page.tsx          # Home page (User CRUD)
 ├── prisma/
-│   └── schema.prisma      # Prisma schema
-├── public/                # Static assets
-├── .env                   # Environment variables
-├── .env.example           # Environment template
-├── .gitignore             # Git ignore rules
-├── next.config.ts         # Next.js configuration
-├── package.json           # Dependencies
-├── tailwind.config.ts     # Tailwind configuration
-└── tsconfig.json          # TypeScript configuration
+│   ├── schema.prisma     # Prisma schema
+│   └── migrations/       # Database migrations
+├── public/               # Static assets
+├── .env                  # Environment variables
+├── .env.example          # Environment template
+├── .gitignore            # Git ignore rules
+├── next.config.ts        # Next.js configuration
+├── package.json          # Dependencies
+└── tsconfig.json         # TypeScript configuration
 ```
 
 ## 🔧 Available Scripts
@@ -102,6 +112,30 @@ nextjs-crud-app/
 | `npx prisma studio` | Open Prisma database GUI |
 | `npx prisma generate` | Generate Prisma client |
 | `npx prisma db push` | Push schema to database |
+
+## 🔌 API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/users` | Get all users |
+| POST | `/api/users` | Create a new user |
+| PUT | `/api/users` | Update a user |
+| DELETE | `/api/users?id=` | Delete a user by ID |
+
+### Example API Usage
+
+```bash
+# Get all users
+curl http://localhost:3000/api/users
+
+# Create a user
+curl -X POST http://localhost:3000/api/users \
+  -H "Content-Type: application/json" \
+  -d '{"name": "John Doe", "email": "john@example.com"}'
+
+# Delete a user
+curl -X DELETE "http://localhost:3000/api/users?id=1"
+```
 
 ## 🧑‍💻 Technologies
 
