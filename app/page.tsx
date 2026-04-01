@@ -13,8 +13,7 @@ export default function Home() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
-  // Fetch users on load
-  useEffect(() => {
+   useEffect(() => {
     fetchUsers();
   }, []);
 
@@ -34,7 +33,7 @@ export default function Home() {
     if (res.ok) {
       setName("");
       setEmail("");
-      fetchUsers(); // Refresh list
+      fetchUsers();  
     }
   };
 
@@ -60,7 +59,7 @@ export default function Home() {
           required
         />
         <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
-          Add User
+          Add User           
         </button>
       </form>
 
