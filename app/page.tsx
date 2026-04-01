@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { fetchUsers, createUser, updateUser, deleteUser } from "@/app/lib/api";
 
 type User = {
   id: number;
@@ -18,36 +19,25 @@ export default function Home() {
 
   // Fetch users on load
   useEffect(() => {
-    fetchUsers();
+    loadUsers();
   }, []);
 
-  const fetchUsers = async () => {
-    const res = await fetch("/api/users");
-    const data = await res.json();
+  const loadUsers = async () => {
+    const data = await fetchUsers();
     setUsers(data);
   };
 
   const addUser = async (e: React.FormEvent) => {
     e.preventDefault();
-    const res = await fetch("/api/users", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email }),
-    });
-    if (res.ok) {
-      setName("");
-      setEmail("");
-      fetchUsers();
-    }
+    await createUser(name, email);
+    setName("");
+    setEmail("");
+    loadUsers();
   };
 
-  const deleteUser = async (id: number) => {
-    const res = await fetch(`/api/users?id=${id}`, {
-      method: "DELETE",
-    });
-    if (res.ok) {
-      fetchUsers();
-    }
+  const deleteUserById = async (id: number) => {
+    await deleteUser(id);
+    loadUsers();
   };
 
   const startEdit = (user: User) => {
@@ -63,15 +53,9 @@ export default function Home() {
   };
 
   const saveEdit = async (id: number) => {
-    const res = await fetch("/api/users", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id, name: editName, email: editEmail }),
-    });
-    if (res.ok) {
-      setEditingId(null);
-      fetchUsers();
-    }
+    await updateUser(id, editName, editEmail);
+    setEditingId(null);
+    loadUsers();
   };
 
   return (
@@ -143,7 +127,7 @@ export default function Home() {
                     Edit
                   </button>
                   <button
-                    onClick={() => deleteUser(user.id)}
+                    onClick={() => deleteUserById(user.id)}
                     className="bg-red-500 text-white px-2 py-1 rounded"
                   >
                     Delete
