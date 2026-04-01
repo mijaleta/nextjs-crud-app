@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/app/lib/prisma';
 
 export async function GET() {
@@ -17,5 +17,21 @@ export async function POST(request: Request) {
     return NextResponse.json(user, { status: 201 });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to create user' }, { status: 500 });
+  }
+}
+
+export async function DELETE(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const id = parseInt(searchParams.get('id') as string);
+    
+    if (!id) {
+      return NextResponse.json({ error: 'User ID is required' }, { status: 400 });
+    }
+    
+    await prisma.user.delete({ where: { id } });
+    return NextResponse.json({ message: 'User deleted successfully' }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ error: 'Failed to delete user' }, { status: 500 });
   }
 }
