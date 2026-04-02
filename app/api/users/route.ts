@@ -3,14 +3,28 @@ import { prisma } from '@/app/lib/prisma';
 
 function getErrorMessage(error: unknown): string {
   if (error instanceof Error) {
-    // Try to get cleaner message from Prisma error.cause
-    if (error.cause instanceof Error) {
-      return error.cause.message;
+    const msg = error.message;
+    // Check for TurboPack verbose internal strings
+    if (msg.includes('TURBOPACK') || msg.includes('imported__module')) {
+      // Check for unique constraint in the full error
+      const causeMsg = error.cause instanceof Error ? error.cause.message : '';
+      if (causeMsg.includes('Unique constraint failed') || msg.includes('email')) {
+        return 'Email already exists';
+      }
+      return 'Database operation failed';
     }
-    // Clean up verbose Prisma errors
-    const match = error.message.match(/`([^`]+)`/);
-    if (match) return match[1];
-    return error.message;
+    // Try error.cause for cleaner message
+    if (error.cause instanceof Error) {
+      const causeMsg = error.cause.message;
+      if (causeMsg.includes('Unique constraint failed')) {
+        return 'Email already exists';
+      }
+      if (causeMsg.includes('Record to update')) {
+        return 'User not found';
+      }
+      return causeMsg;
+    }
+    return msg;
   }
   return 'Unknown error';
 }
