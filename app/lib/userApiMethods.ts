@@ -22,7 +22,7 @@ export const userApiMethods = {
     }
     return res.json();
   },
-
+// 
   updateUser: async (id: number, name: string, email: string) => {
     const res = await fetch("/api/users", {
       method: "PUT",
