@@ -3,7 +3,10 @@
 export const userApiMethods = {
   fetchUsers: async () => {
     const res = await fetch("/api/users");
-    if (!res.ok) throw new Error("Failed to fetch users");
+    if (!res.ok) {
+      const data = await res.json();
+      throw new Error(data.error || "Failed to fetch users");
+    }
     return res.json();
   },
 
@@ -13,7 +16,10 @@ export const userApiMethods = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email }),
     });
-    if (!res.ok) throw new Error("Failed to create user");
+    if (!res.ok) {
+      const data = await res.json();
+      throw new Error(data.error || "Failed to create user");
+    }
     return res.json();
   },
 
@@ -23,7 +29,10 @@ export const userApiMethods = {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id, name, email }),
     });
-    if (!res.ok) throw new Error("Failed to update user");
+    if (!res.ok) {
+      const data = await res.json();
+      throw new Error(data.error || "Failed to update user");
+    }
     return res.json();
   },
 
@@ -31,7 +40,10 @@ export const userApiMethods = {
     const res = await fetch(`/api/users?id=${id}`, {
       method: "DELETE",
     });
-    if (!res.ok) throw new Error("Failed to delete user");
+    if (!res.ok) {
+      const data = await res.json();
+      throw new Error(data.error || "Failed to delete user");
+    }
     return res.json();
   },
 };
