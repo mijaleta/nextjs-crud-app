@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { fetchUsers, createUser, updateUser, deleteUser } from "@/app/lib/api";
+import { userApiMethods } from "@/app/lib/userApiMethods";
 
 type User = {
   id: number;
@@ -23,20 +23,20 @@ export default function Home() {
   }, []);
 
   const loadUsers = async () => {
-    const data = await fetchUsers();
+    const data = await userApiMethods.fetchUsers();
     setUsers(data);
   };
 
   const addUser = async (e: React.FormEvent) => {
     e.preventDefault();
-    await createUser(name, email);
+    await userApiMethods.createUser(name, email);
     setName("");
     setEmail("");
     loadUsers();
   };
 
   const deleteUserById = async (id: number) => {
-    await deleteUser(id);
+    await userApiMethods.deleteUser(id);
     loadUsers();
   };
 
@@ -53,7 +53,7 @@ export default function Home() {
   };
 
   const saveEdit = async (id: number) => {
-    await updateUser(id, editName, editEmail);
+    await userApiMethods.updateUser(id, editName, editEmail);
     setEditingId(null);
     loadUsers();
   };
